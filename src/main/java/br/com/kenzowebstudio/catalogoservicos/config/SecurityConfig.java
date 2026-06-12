@@ -1,0 +1,31 @@
+package br.com.kenzowebstudio.catalogoservicos.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    // Mantemos o seu criptografador de senha intacto
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // Adicionamos esta corrente de filtros para liberar os endpoints da API
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable()) // Desabilita o CSRF (necessário para APIs RESTful deparadas)
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll() // Libera temporariamente TODOS os endpoints (/api/auth, /api/comercios, etc)
+            );
+        
+        return http.build();
+    }
+}
