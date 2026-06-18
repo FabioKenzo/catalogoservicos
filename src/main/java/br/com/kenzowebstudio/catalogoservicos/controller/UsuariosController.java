@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.kenzowebstudio.catalogoservicos.dto.UsuarioDTO;
 import br.com.kenzowebstudio.catalogoservicos.model.Usuarios;
 import br.com.kenzowebstudio.catalogoservicos.service.UsuariosService;
 
@@ -22,11 +23,19 @@ public class UsuariosController {
 
     //endpoint post api/auth/registrar
     @PostMapping("/registrar")
+    
     public ResponseEntity<?> registrar(@RequestBody Usuarios usuarios){
         try{
 
-            Usuarios novUsuarios = usuariosService.cadastrarUsuarios(usuarios);
-            return ResponseEntity.status(HttpStatus.CREATED).body(novUsuarios);
+            Usuarios novoUsuarios = usuariosService.cadastrarUsuarios(usuarios);
+
+            UsuarioDTO dto = new UsuarioDTO(
+                novoUsuarios.getId(), 
+                novoUsuarios.getNome(), 
+                novoUsuarios.getEmail(), 
+                novoUsuarios.getTipoPerfil()
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 
         }catch(RuntimeException e){
 
@@ -40,15 +49,19 @@ public class UsuariosController {
         try{
 
             Usuarios usuariosLogado = usuariosService.realizarLogin(loginRequest.getEmail(), loginRequest.getSenha());
-            return ResponseEntity.ok(usuariosLogado);
+
+            UsuarioDTO dto = new UsuarioDTO(
+                usuariosLogado.getId(), 
+                usuariosLogado.getNome(),
+                usuariosLogado.getEmail(), 
+                usuariosLogado.getTipoPerfil()
+            );
+            return ResponseEntity.ok(dto);
+            
 
         }catch(RuntimeException e){
             //se a senha ou e-mail estiverem errados retorna erro 400
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-
-
-
 }
