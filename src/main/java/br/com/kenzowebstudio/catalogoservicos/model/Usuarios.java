@@ -1,6 +1,8 @@
 package br.com.kenzowebstudio.catalogoservicos.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ public class Usuarios {
 
 
     @Column(nullable = false, length = 255) 
+    @JsonIgnore
     private String senha;
 
     @Column( name = "tipoPerfil" ,nullable = false, length = 20)
