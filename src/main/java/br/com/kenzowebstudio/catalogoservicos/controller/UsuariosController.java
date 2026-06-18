@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.kenzowebstudio.catalogoservicos.dto.LoginDTO;
 import br.com.kenzowebstudio.catalogoservicos.dto.UsuarioDTO;
 import br.com.kenzowebstudio.catalogoservicos.model.Usuarios;
 import br.com.kenzowebstudio.catalogoservicos.service.UsuariosService;
@@ -45,10 +46,12 @@ public class UsuariosController {
 
     //endpoint post api/auth/login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuarios loginRequest){
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest){
         try{
-
-            Usuarios usuariosLogado = usuariosService.realizarLogin(loginRequest.getEmail(), loginRequest.getSenha());
+            Usuarios usuariosLogado = usuariosService.realizarLogin(
+                loginRequest.getEmail(), 
+                loginRequest.getSenha()
+            );
 
             UsuarioDTO dto = new UsuarioDTO(
                 usuariosLogado.getId(), 
