@@ -11,59 +11,61 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.kenzowebstudio.catalogoservicos.dto.LoginDTO;
 import br.com.kenzowebstudio.catalogoservicos.dto.UsuarioDTO;
+import br.com.kenzowebstudio.catalogoservicos.dto.UsuarioCadastroDTO;
 import br.com.kenzowebstudio.catalogoservicos.model.Usuarios;
 import br.com.kenzowebstudio.catalogoservicos.service.UsuariosService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*") // permite o angular consumir a api em outra porta sem erro 
+@CrossOrigin(origins = "*")
 public class UsuariosController {
 
     @Autowired
     private UsuariosService usuariosService;
 
-    //endpoint post api/auth/registrar
+    //endpoint post api/auth/registrar usando UsuarioCadastroDTO
     @PostMapping("/registrar")
-    
-    public ResponseEntity<?> registrar(@RequestBody Usuarios usuarios){
-        try{
+    public ResponseEntity<?> registrar(@RequestBody UsuarioCadastroDTO dto){
+        try {
+            Usuarios novoUsuarios = new Usuarios();
+            novoUsuarios.setNome(dto.getNome());
+            novoUsuarios.setEmail(dto.getEmail());
+            novoUsuarios.setSenha(dto.getSenha()); // senha pura, será criptografada no service
+            novoUsuarios.setTipoPerfil(dto.getTipoPerfil());
 
-            Usuarios novoUsuarios = usuariosService.cadastrarUsuarios(usuarios);
+            Usuarios salvo = usuariosService.cadastrarUsuarios(novoUsuarios);
 
-            UsuarioDTO dto = new UsuarioDTO(
-                novoUsuarios.getId(), 
-                novoUsuarios.getNome(), 
-                novoUsuarios.getEmail(), 
-                novoUsuarios.getTipoPerfil()
+            UsuarioDTO resposta = new UsuarioDTO(
+                salvo.getId(),
+                salvo.getNome(),
+                salvo.getEmail(),
+                salvo.getTipoPerfil()
             );
-            return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(resposta);
 
-        }catch(RuntimeException e){
-
+        } catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    //endpoint post api/auth/login
+    // endpoint post api/auth/login usando LoginDTO
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest){
-        try{
+        try {
             Usuarios usuariosLogado = usuariosService.realizarLogin(
-                loginRequest.getEmail(), 
+                loginRequest.getEmail(),
                 loginRequest.getSenha()
             );
 
             UsuarioDTO dto = new UsuarioDTO(
-                usuariosLogado.getId(), 
+                usuariosLogado.getId(),
                 usuariosLogado.getNome(),
-                usuariosLogado.getEmail(), 
+                usuariosLogado.getEmail(),
                 usuariosLogado.getTipoPerfil()
             );
             return ResponseEntity.ok(dto);
-            
 
-        }catch(RuntimeException e){
-            //se a senha ou e-mail estiverem errados retorna erro 400
+        } catch(RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
