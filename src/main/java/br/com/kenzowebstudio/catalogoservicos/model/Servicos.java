@@ -1,6 +1,5 @@
 package br.com.kenzowebstudio.catalogoservicos.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "servicos")
 public class Servicos {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,18 +29,17 @@ public class Servicos {
     @Column(nullable = false, length = 150)
     private String descricao;
 
-
-    //vincula o serviço diretamente a entidade usuarios
+    // vincula o serviço diretamente a entidade usuarios
     @OneToOne
     @JoinColumn(name = "usuario_id", nullable = false, unique = true)
     private Usuarios usuarios;
 
-    //construtor padrao jpa
-    public Servicos(){
+    // construtor padrao jpa
+    public Servicos() {
 
     }
 
-    //construtor completo
+    // construtor completo
     public Servicos(Long id, String categoria, String bairro, String telefone, String descricao, Usuarios usuarios) {
         this.id = id;
         this.categoria = categoria;

@@ -9,5 +9,4 @@ import br.com.kenzowebstudio.catalogoservicos.model.Categorias;
 public interface CategoriasRepository extends JpaRepository<Categorias, Long> {
 
 Optional<Categorias> findByNomeCategoria(String nomeCategoria);
-
 }

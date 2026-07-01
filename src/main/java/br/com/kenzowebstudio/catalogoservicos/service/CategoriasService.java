@@ -1,7 +1,6 @@
 package br.com.kenzowebstudio.catalogoservicos.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +24,13 @@ public class CategoriasService {
         .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o ID: " + id));
     }
 
+    
+    public Categorias buscarPorNome(String nomeCategoria) {
+        return categoriasRepository.findByNomeCategoria(nomeCategoria)
+        .orElseThrow(() -> new RuntimeException("Categoria não encontrada com o nome: " + nomeCategoria));
+    }
 
     public Categorias salvar(Categorias categorias){
         return categoriasRepository.save(categorias);
     }
-
 }

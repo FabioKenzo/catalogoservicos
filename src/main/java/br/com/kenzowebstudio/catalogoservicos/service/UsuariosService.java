@@ -3,20 +3,23 @@ package br.com.kenzowebstudio.catalogoservicos.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.kenzowebstudio.catalogoservicos.model.Usuarios;
 import br.com.kenzowebstudio.catalogoservicos.repository.UsuariosRepository;
 
 @Service
-public class UsuariosService {
+public class UsuariosService implements UserDetailsService {
 
     @Autowired
     private UsuariosRepository usuariosRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     public Usuarios cadastrarUsuarios(Usuarios usuarios){
@@ -55,6 +58,10 @@ public class UsuariosService {
         return usuarios; //login efetuado com sucesso
     }
 
-
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+        return (UserDetails) usuariosRepository.findByEmail(email)
+        .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o e-mail: " + email));
+    }
 
 }

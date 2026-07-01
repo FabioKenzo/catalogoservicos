@@ -48,5 +48,4 @@ public class Categorias {
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
-
 }

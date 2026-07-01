@@ -1,24 +1,32 @@
 package br.com.kenzowebstudio.catalogoservicos.dto;
 
 public class ServicoDTO {
-    private Long id; 
-    private String categoria; 
-    private String bairro; 
-    private String telefone; 
-    private String descricao; 
+    private Long id;
+    private String categoria;
+    private String bairro;
+    private String telefone;
+    private String descricao;
     private UsuarioDTO usuario;
 
     //construtor
-    public ServicoDTO(Long id, String categoria, String bairro, String telefone, String descricao, UsuarioDTO usuario) {
-        this.id = id;
-        this.categoria = categoria;
-        this.bairro = bairro;
-        this.telefone = telefone;
-        this.descricao = descricao;
-        this.usuario = usuario;
+    public ServicoDTO(br.com.kenzowebstudio.catalogoservicos.model.Servicos servico) {
+        this.id = servico.getId();
+        this.categoria = servico.getCategoria();
+        this.bairro = servico.getBairro();
+        this.telefone = servico.getTelefone();
+        this.descricao = servico.getDescricao();
+
+        //mapeia a entidade Usuarios para o UsuarioDTO limpo
+        if (servico.getUsuarios() != null) {
+            this.usuario = new UsuarioDTO(
+                    servico.getUsuarios().getId(),
+                    servico.getUsuarios().getNome(),
+                    servico.getUsuarios().getEmail(),
+                    servico.getUsuarios().getTipoPerfil());
+        }
     }
 
-    //gets e sets
+    // gets e sets
     public Long getId() {
         return id;
     }
@@ -66,8 +74,4 @@ public class ServicoDTO {
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
-
-    
-
-    
 }

@@ -46,7 +46,6 @@ public class UsuarioDTO {
     public void setTipoPerfil(String tipoPerfil) {
         this.tipoPerfil = tipoPerfil;
     }
-
 }
 
 

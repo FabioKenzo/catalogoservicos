@@ -13,6 +13,4 @@ public interface ComerciosRepository extends JpaRepository<Comercios, Long> {
 
     //bucsa por categoria e bairro
     List<Comercios> findByCategoriasNomeCategoriaAndBairro(String nomeCategoria, String bairro);
-
-
 }

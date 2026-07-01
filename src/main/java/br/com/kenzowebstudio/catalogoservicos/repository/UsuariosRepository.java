@@ -9,5 +9,4 @@ import br.com.kenzowebstudio.catalogoservicos.model.Usuarios;
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
     Optional<Usuarios> findByEmail(String email);
-
 }
