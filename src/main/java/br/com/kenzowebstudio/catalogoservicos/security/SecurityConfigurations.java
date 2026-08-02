@@ -66,8 +66,8 @@ public class SecurityConfigurations {
         //permite o front do Angular rodando localhost
         configuration.setAllowedOrigins(Arrays.asList(
             "http://localhost:4200",
-            "https://catalogoservicos-frontend.netlify.app/",
-            "https://mango-sea-0bb3bb20f.7.azurestaticapps.net"
+            "https://catalogoservicos-frontend.netlify.app/"
+            //"https://mango-sea-0bb3bb20f.7.azurestaticapps.net" // usado apenas para teste em cloud (azure, ja excluido da plataforma)
     ));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
