@@ -64,7 +64,12 @@ public class SecurityConfigurations {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         //permite o front do Angular rodando localhost
-        configuration.setAllowedOrigins(Arrays.asList("https://catalogoservicos-frontend.netlify.app/"));
+        configuration.setAllowedOrigins(Arrays.asList(
+            "http://localhost:4200",
+            "https://catalogoservicos-frontend.netlify.app/",
+            "https://mango-sea-0bb3bb20f.7.azurestaticapps.net"
+    ));
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         //permite o cabecalho uuthorization do Token jwt
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
