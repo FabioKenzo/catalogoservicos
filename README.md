@@ -90,6 +90,84 @@ O CatálogoServiços foi criado para aproximar esses dois públicos através de 
 
 ---
 
+# ☁️ Deploy, Infraestrutura e Testes na Microsoft Azure
+
+Como parte do meu aprendizado em **Cloud Computing**, **DevOps** e preparação para a certificação **Microsoft Azure AZ-900**, esta API também passou por um processo completo de **provisionamento, implantação, validação e testes** na Microsoft Azure, permitindo colocar em prática a hospedagem de aplicações **Java/Spring Boot** em infraestrutura de nuvem.
+
+Durante esse processo foram realizados testes de publicação da aplicação em uma Máquina Virtual Linux, configuração de segurança da infraestrutura, execução da API utilizando Docker e validação da comunicação entre o backend e o frontend.
+
+## 🏗️ Infraestrutura Utilizada
+
+- Microsoft Azure Virtual Machine (Ubuntu Linux)
+- Docker
+- Azure Network Security Group (NSG)
+- Azure Resource Group
+- GitHub
+- Java 21
+- Spring Boot
+
+---
+
+## 🚀 Evidências da Implantação na Nuvem
+
+Durante a implantação da aplicação foram validadas todas as etapas necessárias para disponibilizar a API em ambiente cloud.
+
+### 1️⃣ Provisionamento da Máquina Virtual
+
+Criação e configuração de uma **Máquina Virtual Linux (Ubuntu)** na Microsoft Azure, incluindo acesso remoto via SSH, configuração do endereço IP público e preparação do ambiente para execução da aplicação.
+
+
+![Máquina Virtual na Microsoft Azure](./backend-1-azure-vm.png)
+
+
+*Máquina Virtual provisionada na Microsoft Azure para hospedagem da API.*
+
+---
+
+### 2️⃣ Configuração da Infraestrutura e Segurança
+
+Configuração das regras de segurança utilizando o **Azure Network Security Group (NSG)**, permitindo o acesso às portas utilizadas pela aplicação e garantindo uma comunicação segura entre cliente e servidor.
+
+
+![Azure Network Security Group](./backend-2-nsg.png)
+
+
+*Configuração das regras de segurança da infraestrutura na Microsoft Azure.*
+
+---
+
+### 3️⃣ Deploy da API utilizando Docker
+
+Execução da aplicação **Spring Boot** em um container Docker dentro da Máquina Virtual Linux, validando o funcionamento da API em ambiente cloud.
+
+
+![Deploy da API com Docker](./backend-3-docker.png)
+
+
+*Aplicação Spring Boot executando em container Docker na Microsoft Azure.*
+
+---
+
+## 🎯 Competências Demonstradas
+
+Durante este processo foram aplicados conhecimentos em:
+
+- Microsoft Azure
+- Cloud Computing
+- Infraestrutura como Serviço (IaaS)
+- Provisionamento de Máquinas Virtuais Linux (Ubuntu)
+- Configuração de acesso remoto via SSH
+- Azure Resource Groups
+- Azure Network Security Groups (NSG)
+- Docker
+- Deploy de aplicações Java/Spring Boot
+- Redes e segurança em ambiente cloud
+- Integração entre Frontend e Backend
+- Testes de APIs com Postman
+- DevOps Fundamentals
+
+---
+
 ## 🏗️ Arquitetura da Aplicação
 
 ```text
