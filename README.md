@@ -148,6 +148,14 @@ Execução da aplicação **Spring Boot** em um container Docker dentro da Máqu
 
 ---
 
+# 💰 FinOps
+
+Após a conclusão dos testes e validação da infraestrutura, todos os recursos utilizados na Azure foram removidos através da exclusão do **Resource Group**.
+
+Essa prática evita cobranças desnecessárias e demonstra preocupação com boas práticas de gerenciamento de custos em ambientes Cloud.
+
+---
+
 ## 🎯 Competências Demonstradas
 
 Durante este processo foram aplicados conhecimentos em:
